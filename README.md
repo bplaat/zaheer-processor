@@ -160,13 +160,14 @@ An instruction sets only the processor flags when the condition is set to `-` (a
 <tr><td colspan="5"></td></tr>
 
 <tr><td colspan="5"><i>Stack instructions (4):</i></td></tr>
-<tr><td>20</td><td><code>push</code></td><td>Push word (16-bit) on the stack <code>(mem=0)</code></td><td><code>[sp] = data, sp -= 2</code></td><td>-</td></tr>
+<tr><td>20</td><td><code>push</code></td><td>Push word (16-bit) on the stack <code>(mem=0)</code></td><td><code>[sp] = data, sp -= 2</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>21</td><td><code>pop</code></td><td>Pop word (16-bit) of the stack <code>(mem=1)</code></td><td><code>dest = [sp + 2], sp += 2</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>22</td><td><code>call</code></td><td>Call relative subroutine <code>(dest=0, mem=0)</code></td><td><code>[sp] = ip, sp -= 2, ip += data</code></td><td>-</td></tr>
 <tr><td>22</td><td><code>call</code></td><td>Call absolute subroutine <code>(dest=1, mem=0)</code></td><td><code>[sp] = ip, sp -= 2, ip = data</code></td><td>-</td></tr>
 <tr><td>23</td><td><code>ret</code></td><td>Return from subroutine <code>(mem=1)</code></td><td><code>ip = [sp + 2], sp += 2 + data</code></td><td>-</td></tr>
 <tr><td colspan="5"></td></tr>
 
+<tr><td colspan="5"><i>Reserved instructions (8):</i></td></tr>
 <tr><td>24/31</td><td><i>Reserved</i></td><td>-</td><td>-</td><td>-</td></tr>
 </table>
 

@@ -9,18 +9,19 @@ This is an cutdown version of the Kora processor which is the sucessor to the Ne
 - Variable instruction length (2 bytes or 4 bytes)
 - Every instruction can be conditional executed
 - All external I/O must be memory based
-- Simple processor interrupts
+- One processor hardware interrupt line
 
 ## Insperations
-- Many registers for effienct calling convention: ARM, RISC-V
-- Memory load access in every instruction: x86
+- Many registers for an efficient calling convention: ARM, RISC-V
+- Memory read posibility in every instruction: x86
 - Conditional code for every instruction: ARM
 - Flags and condition combinations: x86
-- Interupt and reset address vector: 6502
+- A simple processor interrupt system like the 6502
+- Standard interupt and reset address vector: 6502
 
 ## Special addresses
-- Interrupt jump address: `0xfffc - 0xfffd`
-- Reset jump address: `0xfffe - 0xffff`
+- Interrupt jump address vector: `0xfffc - 0xfffd`
+- Reset jump address vector: `0xfffe - 0xffff`
 
 ## Instruction encoding / Modes
 Every instruction has an opcode and a mode. The mode are three bits that descrips how the instruction must be read and executed:
@@ -160,16 +161,16 @@ An instruction sets only the processor flags when the condition is set to `-` (a
 <tr><td colspan="5"><i>Stack instructions (4):</i></td></tr>
 <tr><td>20</td><td><code>push</code></td><td>Push word (16-bit) on the stack <code>(mem=0)</code></td><td><code>[sp] = data, sp -= 2</code></td><td>-</td></tr>
 <tr><td>21</td><td><code>pop</code></td><td>Pop word (16-bit) of the stack <code>(mem=1)</code></td><td><code>dest = [sp + 2], sp += 2</code></td><td><code>z</code>, <code>s</code></td></tr>
-<tr><td>22</td><td><code>call</code></td><td>Call relative subroutine <code>(dest=0, mem=1)</code></td><td><code>[sp] = ip, sp -= 2, ip += data</code></td><td>-</td></tr>
-<tr><td>22</td><td><code>call</code></td><td>Call absolute subroutine <code>(dest=1, mem=1)</code></td><td><code>[sp] = ip, sp -= 2, ip = data</code></td><td>-</td></tr>
-<tr><td>23</td><td><code>ret</code></td><td>Return from subroutine <code>(mem=0)</code></td><td><code>ip = [sp + 2], sp += 2 + data</code></td><td>-</td></tr>
+<tr><td>22</td><td><code>call</code></td><td>Call relative subroutine <code>(dest=0, mem=0)</code></td><td><code>[sp] = ip, sp -= 2, ip += data</code></td><td>-</td></tr>
+<tr><td>22</td><td><code>call</code></td><td>Call absolute subroutine <code>(dest=1, mem=0)</code></td><td><code>[sp] = ip, sp -= 2, ip = data</code></td><td>-</td></tr>
+<tr><td>23</td><td><code>ret</code></td><td>Return from subroutine <code>(mem=1)</code></td><td><code>ip = [sp + 2], sp += 2 + data</code></td><td>-</td></tr>
 <tr><td colspan="5"></td></tr>
 
 <tr><td>24/31</td><td><i>Reserved</i></td><td>-</td><td>-</td><td>-</td></tr>
 </table>
 
 ## Pseudo instructions
-Some instructions are assembled as diffrent instructions because they dont exists:
+Some instructions are assembled as diffrent instructions because they don't exists:
 
 ```
 mov t0, 5   ->      lw t0, 5

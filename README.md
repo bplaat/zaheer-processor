@@ -48,8 +48,8 @@ The Zaheer processor as 16 registers in total, 13 are for general purpose use an
 <tr><td>5</td><td><code>r5</code>, <code>s1</code></td><td>Saved variable 2 register</td></tr>
 <tr><td>6</td><td><code>r6</code>, <code>s2</code></td><td>Saved variable 3 register</td></tr>
 <tr><td>7</td><td><code>r7</code>, <code>s3</code></td><td>Saved variable 4 register</td></tr>
-<tr><td>8</td><td><code>r8</code>, <code>a0</code></td><td>Function argument 1 / Return argument low part register</td></tr>
-<tr><td>9</td><td><code>r9</code>, <code>a1</code></td><td>Function argument 2 / Return argument high part register</td></tr>
+<tr><td>8</td><td><code>r8</code>, <code>a0</code></td><td>Function argument 1 / Return argument (low word when 32-bit) register</td></tr>
+<tr><td>9</td><td><code>r9</code>, <code>a1</code></td><td>Function argument 2 / Return argument (high word when 32-bit) register</td></tr>
 <tr><td>10</td><td><code>r10</code>, <code>a2</code></td><td>Function argument 3 register</td></tr>
 <tr><td>11</td><td><code>r11</code>, <code>a3</code></td><td>Function argument 4 register</td></tr>
 <tr><td>12</td><td><code>r12</code>, <code>bp</code></td><td>Stack base pointer register</td></tr>
@@ -143,7 +143,7 @@ An instruction sets only the processor flags when the condition is set to `-` (a
 <tr><td>8</td><td><code>sub</code></td><td>Subtract</td><td><code>dest -= data</code></td><td><code>c</code>, <code>z</code>, <code>s</code>, <code>o</code></td></tr>
 <tr><td>9</td><td><code>sbb</code></td><td>Subtract with borrow</td><td><code>dest -= data + carry</code></td><td><code>c</code>, <code>z</code>, <code>s</code>, <code>o</code></td></tr>
 <tr><td>10</td><td><code>neg</code></td><td>Negate</td><td><code>dest = -data</code></td><td><code>c</code>, <code>z</code>, <code>s</code>, <code>o</code></td></tr>
-<tr><td>11</td><td><code>cmp</code></td><td>Compare</td><td><code>dest - data (always set flags)</code></td><td><code>c</code>, <code>z</code>, <code>s</code>, <code>o</code></td></tr>
+<tr><td>11</td><td><code>cmp</code></td><td>Arithmetic compare (sub)</td><td><code>dest - data (always set flags)</code></td><td><code>c</code>, <code>z</code>, <code>s</code>, <code>o</code></td></tr>
 <tr><td colspan="5"></td></tr>
 
 <tr><td colspan="5"><i>Bitwise instructions (8):</i></td></tr>
@@ -151,7 +151,7 @@ An instruction sets only the processor flags when the condition is set to `-` (a
 <tr><td>13</td><td><code>or</code></td><td>Logical or</td><td><code>dest |= data</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>14</td><td><code>xor</code></td><td>Logical xor</td><td><code>dest ^= data</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>15</td><td><code>not</code></td><td>Logical not</td><td><code>dest = ~data</code></td><td><code>z</code>, <code>s</code></td></tr>
-<tr><td>16</td><td><code>test</code></td><td>Logical compare (and)</td><td><code>dest &amp; data (always set flags)</code></td><td><code>z</code>, <code>s</code></td></tr>
+<tr><td>16</td><td><code>test</code></td><td>Bitwise compare (and)</td><td><code>dest &amp; data (always set flags)</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>17</td><td><code>shl</code></td><td>Logical shift left</td><td><code>dest &lt;&lt;= data &amp; 15</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>18</td><td><code>shr</code></td><td>Logical shift right</td><td><code>dest &gt;&gt;= data &amp; 15</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>19</td><td><code>sar</code></td><td>Arithmetic shift right</td><td><code>dest &gt;&gt;&gt;= data &amp; 15</code></td><td><code>z</code>, <code>s</code></td></tr>

@@ -6,7 +6,8 @@ This is an cutdown version of the Kora processor which is the sucessor to the Ne
 - 16 registers of which 13 are general purpose
 - 16-bit address space (64 KiB)
 - 16-bit data interface with the memory
-- Variable instruction length (2 bytes or 4 bytes)
+- Small orthogonal instruction count
+- Variable instruction length (2 bytes or 4 bytes) for smaller program size
 - Every instruction can be conditional executed
 - All external I/O must be memory based
 - One processor hardware interrupt line
@@ -27,9 +28,9 @@ This is an cutdown version of the Kora processor which is the sucessor to the Ne
 Every instruction has an opcode and a mode. The mode are three bits that descrips how the instruction must be read and executed:
 
 ```
-bit 0 Immidiate/Register
-bit 1 Small/Normal
-bit 2 Data/Memory read
+bit 0 = Immidiate/Register
+bit 1 = Small/Normal
+bit 2 = Data/Memory read
 ```
 
 ![Zaheer instruction encoding](docs/instruction-encoding.png)
@@ -134,8 +135,8 @@ An instruction sets only the processor flags when the condition is set to `-` (a
 <tr><td>1</td><td><code>lw</code></td><td>Load word (16-bit)</td><td><code>dest = data</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>2</td><td><code>lb</code></td><td>Load unsigned byte (8-bit)</td><td><code>dest = data &amp; 0x00ff</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>3</td><td><code>lbs</code></td><td>Load signed byte (8-bit)</td><td><code>dest = signed(data &amp; 0x00ff)</code></td><td><code>z</code>, <code>s</code></td></tr>
-<tr><td>4</td><td><code>sw</code></td><td>Store word (16-bit) to memory <code>(mem=1)</code></td><td><code>[data] = dest</code></td><td>-</td></tr>
-<tr><td>5</td><td><code>sb</code></td><td>Store word (8-bit) to memory <code>(mem=1)</code></td><td><code>[data] = dest &amp; 0x00ff</code></td><td>-</td></tr>
+<tr><td>4</td><td><code>sw</code></td><td>Store word (16-bit) to memory <code>(mem=0)</code></td><td><code>[data] = dest</code></td><td>-</td></tr>
+<tr><td>5</td><td><code>sb</code></td><td>Store word (8-bit) to memory <code>(mem=0)</code></td><td><code>[data] = dest &amp; 0x00ff</code></td><td>-</td></tr>
 <tr><td colspan="5"></td></tr>
 
 <tr><td colspan="5"><i>Arithmetic instructions (6):</i></td></tr>

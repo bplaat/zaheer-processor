@@ -164,7 +164,7 @@ An instruction sets only the processor flags when the condition is set to `-` (a
 <tr><td colspan="5"></td></tr>
 
 <tr><td colspan="5"><i>Stack instructions (5):</i></td></tr>
-<tr><td>21</td><td><code>push</code></td><td>Push word (16-bit) on the stack</td><td><code>[sp] = data, sp -= 2</code></td><td><code>z</code>, <code>s</code></td></tr>
+<tr><td>21</td><td><code>push</code></td><td>Push word (16-bit) on the stack</td><td><code>[sp] = data, sp -= 2</code></td><td>-</td></tr>
 <tr><td>22</td><td><code>pop</code></td><td>Pop word (16-bit) of the stack</td><td><code>dest = [sp + 2], sp += 2</code></td><td><code>z</code>, <code>s</code></td></tr>
 <tr><td>23</td><td><code>call</code></td><td>Call absolute subroutine</td><td><code>[sp] = ip, sp -= 2, ip = data</code></td><td>-</td></tr>
 <tr><td>24</td><td><code>callr</code></td><td>Call relative subroutine</td><td><code>[sp] = ip, sp -= 2, ip += data</code></td><td>-</td></tr>
